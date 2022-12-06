@@ -30,6 +30,7 @@ const signInHandler = async (req: SignInApiRequest, res: SignInApiResponse) => {
     try {
       isPasswordValid = await compare(password, foundMember.password);
     } catch (err) {
+      console.error(err);
       return res.status(500).json({
         ok: false,
         error: {
