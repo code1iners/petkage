@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+// Members start.
+
+model Member {
+  id                    Int              @id @default(autoincrement())
+  identification        String           @unique
+  isEmailVerified       Boolean          @default(false)
+  name                  String
+  password              String
+  phoneNumber           String?          @unique
+  isPhoneNumberVerified Boolean          @default(false)
+  avatar                String?
+  gender                Gender           @default(NONE)
+  membershipRating      MembershipRating @default(NORMAL)
+  isDormant             Boolean          @default(false)
+  createdAt             DateTime         @default(now())
+  updatedAt             DateTime         @updatedAt
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  NONE
+}
+
+enum MembershipRating {
+  NORMAL
+  PRO
+  MAX
+}
+
+// Members end.
