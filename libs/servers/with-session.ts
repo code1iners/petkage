@@ -26,6 +26,6 @@ export const sessionOptions = {
   },
 } as IronSessionOptions;
 
-export default function withSession(handler: () => any) {
+export default function withSession(handler: any) {
   return withIronSessionApiRoute(handler, sessionOptions);
 }

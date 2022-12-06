@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import type { CoreApiResponse } from "types/api/v1";
+import type { CoreApiResponse } from "@/types/api/v1";
 
 export interface SignUpApiRequest extends NextApiRequest {
   body: {

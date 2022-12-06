@@ -1,9 +1,9 @@
 import { hash } from "bcrypt";
-import { prismaClient } from "@/libs/clients/prisma";
+import { prismaClient } from "@/libs/shared/prisma";
 import type {
   SignUpApiRequest,
   SignUpApiResponse,
-} from "@/types/api/v1/sign-up";
+} from "@/types/api/v1/sign-up.dto";
 
 const signUpHandler = async (req: SignUpApiRequest, res: SignUpApiResponse) => {
   try {
@@ -20,7 +20,7 @@ const signUpHandler = async (req: SignUpApiRequest, res: SignUpApiResponse) => {
       return res.status(400).json({
         ok: false,
         error: {
-          code: "E01",
+          code: "E02",
           message: "Alread the identification exist.",
         },
       });
@@ -34,7 +34,7 @@ const signUpHandler = async (req: SignUpApiRequest, res: SignUpApiResponse) => {
       return res.status(500).json({
         ok: false,
         error: {
-          code: "E02",
+          code: "E03",
           message: "Failed password encoding.",
         },
       });
@@ -48,7 +48,7 @@ const signUpHandler = async (req: SignUpApiRequest, res: SignUpApiResponse) => {
       return res.status(500).json({
         ok: false,
         error: {
-          code: "E03",
+          code: "E04",
           message: "Failed create a new member.",
         },
       });
