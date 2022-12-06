@@ -1,3 +1,7 @@
+export type CoreNextApiRequestQuery = Partial<{
+  [key: string]: string | string[];
+}>;
+
 export interface CoreApiResponse<T = any> {
   ok: boolean;
   data?: T;

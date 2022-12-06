@@ -2,7 +2,7 @@ import withSession from "@/libs/servers/with-session";
 import type {
   SignOutApiRequest,
   SignOutApiResponse,
-} from "@/types/api/v1/sign-out.dto";
+} from "@/types/api/v1/auth/sign-out.dto";
 
 const signOutHandler = async (
   req: SignOutApiRequest,

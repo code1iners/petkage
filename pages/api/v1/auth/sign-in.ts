@@ -5,7 +5,7 @@ import withSession from "@/libs/servers/with-session";
 import type {
   SignInApiRequest,
   SignInApiResponse,
-} from "@/types/api/v1/sign-in.dto";
+} from "@/types/api/v1/auth/sign-in.dto";
 
 const signInHandler = async (req: SignInApiRequest, res: SignInApiResponse) => {
   try {

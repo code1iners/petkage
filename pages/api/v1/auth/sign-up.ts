@@ -3,7 +3,7 @@ import { prismaClient } from "@/libs/shared/prisma";
 import type {
   SignUpApiRequest,
   SignUpApiResponse,
-} from "@/types/api/v1/sign-up.dto";
+} from "@/types/api/v1/auth/sign-up.dto";
 
 const signUpHandler = async (req: SignUpApiRequest, res: SignUpApiResponse) => {
   try {
