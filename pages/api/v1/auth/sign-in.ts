@@ -1,3 +1,4 @@
+import { apiCaller } from "@/libs/servers/api-caller";
 import { sign } from "jsonwebtoken";
 import { compare } from "bcrypt";
 import { prismaClient } from "@/libs/shared/prisma";
@@ -7,7 +8,7 @@ import type {
   SignInApiResponse,
 } from "@/types/api/v1/auth/sign-in.dto";
 
-const signInHandler = async (req: SignInApiRequest, res: SignInApiResponse) => {
+const handler = async (req: SignInApiRequest, res: SignInApiResponse) => {
   try {
     const { identification, password } = req.body;
 
@@ -73,4 +74,8 @@ const signInHandler = async (req: SignInApiRequest, res: SignInApiResponse) => {
   }
 };
 
-export default withSession(signInHandler);
+export default apiCaller({
+  methods: ["POST"],
+  handler,
+  isPrivate: false,
+});

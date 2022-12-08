@@ -4,8 +4,9 @@ import type {
   SignUpApiRequest,
   SignUpApiResponse,
 } from "@/types/api/v1/auth/sign-up.dto";
+import { apiCaller } from "@/libs/servers/api-caller";
 
-const signUpHandler = async (req: SignUpApiRequest, res: SignUpApiResponse) => {
+const handler = async (req: SignUpApiRequest, res: SignUpApiResponse) => {
   try {
     const { identification, name, password } = req.body;
 
@@ -68,4 +69,8 @@ const signUpHandler = async (req: SignUpApiRequest, res: SignUpApiResponse) => {
   }
 };
 
-export default signUpHandler;
+export default apiCaller({
+  methods: ["POST"],
+  handler,
+  isPrivate: false,
+});
