@@ -1,7 +1,5 @@
-import { CoreApiResponse } from "@/types/api/v1";
-import { NextApiRequest, NextApiResponse } from "next";
-
-export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
+import type { NextApiRequest, NextApiResponse } from "next";
+import type { CoreApiResponse, HttpMethod } from "@/types/api/v1";
 
 interface ApiCallerInputs {
   methods: HttpMethod[];
@@ -29,7 +27,7 @@ export const apiCaller = ({
         });
       }
 
-      if (isPrivate && !req.session.member) {
+      if (isPrivate && !req.session?.member) {
         return res.status(401).json({
           ok: false,
           error: {
@@ -41,6 +39,7 @@ export const apiCaller = ({
 
       handler(req, res);
     } catch (err) {
+      console.error(err);
       return res.status(500).json({
         ok: false,
         error: {

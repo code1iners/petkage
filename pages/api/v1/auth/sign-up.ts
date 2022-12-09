@@ -1,5 +1,5 @@
 import { hash } from "bcrypt";
-import { prismaClient } from "@/libs/shared/prisma";
+import { repository } from "@/libs/shared/prisma";
 import type {
   SignUpApiRequest,
   SignUpApiResponse,
@@ -11,7 +11,7 @@ const handler = async (req: SignUpApiRequest, res: SignUpApiResponse) => {
     const { identification, name, password } = req.body;
 
     // Check is already exist member identification.
-    const foundMember = await prismaClient.member.findUnique({
+    const foundMember = await repository.member.findUnique({
       select: { id: true },
       where: { identification },
     });
@@ -41,7 +41,7 @@ const handler = async (req: SignUpApiRequest, res: SignUpApiResponse) => {
       });
     }
 
-    const createdMemberId = await prismaClient.member.create({
+    const createdMemberId = await repository.member.create({
       select: { id: true },
       data: { identification, name, password: encodedPassword },
     });

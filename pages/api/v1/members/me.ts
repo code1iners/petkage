@@ -1,6 +1,6 @@
 import { apiCaller } from "@/libs/servers/api-caller";
 import withSession from "@/libs/servers/with-session";
-import { prismaClient } from "@/libs/shared/prisma";
+import { repository } from "@/libs/shared/prisma";
 import { MeApiRequest, MeApiResponse } from "@/types/api/v1/members/me.dto";
 
 const handler = async (req: MeApiRequest, res: MeApiResponse) => {
@@ -8,7 +8,7 @@ const handler = async (req: MeApiRequest, res: MeApiResponse) => {
     const { member } = req.session;
 
     // Retrieve me by id.
-    const foundMe = await prismaClient.member.findUnique({
+    const foundMe = await repository.member.findUnique({
       select: {
         id: true,
         identification: true,

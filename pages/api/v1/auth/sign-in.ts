@@ -1,7 +1,7 @@
 import { apiCaller } from "@/libs/servers/api-caller";
 import { sign } from "jsonwebtoken";
 import { compare } from "bcrypt";
-import { prismaClient } from "@/libs/shared/prisma";
+import { repository } from "@/libs/shared/prisma";
 import withSession from "@/libs/servers/with-session";
 import type {
   SignInApiRequest,
@@ -13,7 +13,7 @@ const handler = async (req: SignInApiRequest, res: SignInApiResponse) => {
     const { identification, password } = req.body;
 
     // Check identification exist.
-    const foundMember = await prismaClient.member.findUnique({
+    const foundMember = await repository.member.findUnique({
       select: { id: true, password: true },
       where: { identification },
     });
@@ -74,8 +74,10 @@ const handler = async (req: SignInApiRequest, res: SignInApiResponse) => {
   }
 };
 
-export default apiCaller({
-  methods: ["POST"],
-  handler,
-  isPrivate: false,
-});
+export default withSession(
+  apiCaller({
+    methods: ["POST"],
+    handler,
+    isPrivate: false,
+  })
+);

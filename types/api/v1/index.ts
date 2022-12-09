@@ -12,3 +12,5 @@ export interface CoreError {
   code: string;
   message: string;
 }
+
+export type HttpMethod = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
